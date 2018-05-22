@@ -49,14 +49,16 @@ class Navigation extends Component {
 
   renderRightColumn() {
     const { rightColumnStyle } = styles;
-    return (
-      <div
-        className="rightColumn"
-        css={rightColumnStyle}
-      >
-        <NavList />
-      </div>
-    )
+    if (this.state.isOpen) {
+      return (
+        <div
+          className="rightColumn"
+          css={rightColumnStyle}
+        >
+          <NavList />
+        </div>
+      )
+    }
   }
 
   render() {
@@ -93,8 +95,7 @@ const styles = {
     height: '100%',
     right: 0,
     backgroundColor: 'white',
-    transition: 'all .5s cubic-bezier(0.215, 0.61, 0.355, 1)',
-    transformOrigin: 'top 0 right 0',
+    transition: 'width .5s cubic-bezier(0.215, 0.61, 0.355, 1)',
     display: 'flex',
     flexDirection: 'row',
     '@media screen and (max-width: 768px)': {
@@ -103,7 +104,8 @@ const styles = {
       top: 0,
       left: 0,
       flexDirection: 'column',
-      justifyContent: 'flexStart'
+      justifyContent: 'flexStart',
+      transition: 'height .25s cubic-bezier(0.215, 0.61, 0.355, 1)'
     }
   },
   leftColumnStyle: {
@@ -116,14 +118,17 @@ const styles = {
     '@media screen and (max-width: 768px)': {
       width: '100vw',
       flexDirection: 'row',
-      height: '48px'
+      height: '48px !important'
     }
   },
   rightColumnStyle: {
     display: 'inline-block',
     width: 'calc(25vw - 50px)',
+    transition: 'all 1s ease-in-out',
     '@media screen and (max-width: 768px)': {
-      width: '100vw'
+      width: '100%',
+      height: '100%'
+
     }
   },
   buttonStyle: {
@@ -143,7 +148,8 @@ const styles = {
     '@media screen and (max-width: 768px)': {
       transform: 'rotate(0deg)',
       top: 16,
-      right: 0
+      right: 0,
+      height: '24px'
     }
   }
 }

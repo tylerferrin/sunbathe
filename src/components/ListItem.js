@@ -15,7 +15,10 @@ const ListItem = (props) => (
 const styles = {
   listItemStyle: {
     width: '100%',
-    borderBottom: '2px solid black'
+    borderBottom: '2px solid black',
+    '@media screen and (max-width: 768px)': {
+      padding: '10px 0'
+    }
   },
   linkStyles: {
     color: 'black',
