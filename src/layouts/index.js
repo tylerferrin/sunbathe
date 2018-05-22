@@ -27,6 +27,8 @@ class Layout extends Component {
   }
 
   render() {
+    const { data, children } = this.props;
+
     return (
       <div
         css={{
@@ -34,7 +36,7 @@ class Layout extends Component {
         }}
       >
         <Helmet
-          title={this.props.data.site.siteMetadata.title}
+          title={data.site.siteMetadata.title}
           meta={[
             { name: 'description', content: 'Sample' },
             { name: 'keywords', content: 'sample, something' },
@@ -42,7 +44,7 @@ class Layout extends Component {
         />
         <Navigation isMobile={this.state.isMobile} />
         <div>
-          {this.props.children()}
+          {children()}
         </div>
       </div>
     );

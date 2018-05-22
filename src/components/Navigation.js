@@ -41,7 +41,7 @@ class Navigation extends Component {
         width: '100vw'
       };
     } else if (this.state.isOpen && !this.state.isMobile) {
-      return { width: '25vw' }
+      return { width: '22vw' }
     } else {
       return { width: '50px' }
     }
@@ -92,6 +92,7 @@ class Navigation extends Component {
 const styles = {
   containerStyle: {
     position: 'fixed',
+    zIndex: 999,
     height: '100%',
     right: 0,
     backgroundColor: 'white',
@@ -123,7 +124,7 @@ const styles = {
   },
   rightColumnStyle: {
     display: 'inline-block',
-    width: 'calc(25vw - 50px)',
+    width: 'calc(22vw - 50px)',
     transition: 'all 1s ease-in-out',
     '@media screen and (max-width: 768px)': {
       width: '100%',
