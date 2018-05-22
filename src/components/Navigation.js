@@ -8,11 +8,21 @@ class Navigation extends Component {
 
     this.state = {
       isOpen: false,
-      buttonText: 'Menu'
+      buttonText: 'Menu',
+      isMobile: null,
     }
   }
 
-  buttonText = () => this.state.isOpen ? 'Close Menu' : 'Menu';
+  static getDerivedStateFromProps(props, state) {
+    if (props.isMobile !== state.isMobile) {
+      return {
+        isMobile: props.isMobile
+      }
+    }
+    return null;
+  }
+
+  buttonText = () => this.state.isOpen  ? 'Close Menu' : 'Menu';
 
   navWidthToggle() {
     this.setState({
@@ -20,28 +30,44 @@ class Navigation extends Component {
     });
   }
 
+  containerWidth() {
+    if (this.state.isMobile && this.state.isOpen) {
+      return {
+        width: '100vw',
+        height: '100vh'
+      };
+    } else if (this.state.isMobile && !this.state.isOpen) {
+      return {
+        width: '100vw'
+      };
+    } else if (this.state.isOpen && !this.state.isMobile) {
+      return { width: '25vw' }
+    } else {
+      return { width: '50px' }
+    }
+  }
+
   renderRightColumn() {
     const { rightColumnStyle } = styles;
-    if (this.state.isOpen) {
-      return (
-        <div
-          className="rightColumn"
-          css={rightColumnStyle}
-        >
-          <NavList />
-        </div>
-      )
-    }
+    return (
+      <div
+        className="rightColumn"
+        css={rightColumnStyle}
+      >
+        <NavList />
+      </div>
+    )
   }
 
   render() {
     const { containerStyle, leftColumnStyle, buttonStyle } = styles;
-    let isOpenOrClosed = this.state.isOpen ? '25vw' : '50px'
+    let isOpenOrClosed = this.containerWidth();
+
     return (
       <div
         className="navigation-container"
         css={containerStyle}
-        style={{ width: isOpenOrClosed }}
+        style={isOpenOrClosed}
       >
         <div
           className="leftColumn"
@@ -65,12 +91,20 @@ const styles = {
   containerStyle: {
     position: 'fixed',
     height: '100%',
-    top: 0,
     right: 0,
     backgroundColor: 'white',
-    transition: 'width .45s ease-in-out',
+    transition: 'all .5s cubic-bezier(0.215, 0.61, 0.355, 1)',
+    transformOrigin: 'top 0 right 0',
     display: 'flex',
-    flexDirection: 'row'
+    flexDirection: 'row',
+    '@media screen and (max-width: 768px)': {
+      height: '48px',
+      width: '100vw',
+      top: 0,
+      left: 0,
+      flexDirection: 'column',
+      justifyContent: 'flexStart'
+    }
   },
   leftColumnStyle: {
     display: 'inline-block',
@@ -78,13 +112,19 @@ const styles = {
     width: '50px',
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    '@media screen and (max-width: 768px)': {
+      width: '100vw',
+      flexDirection: 'row',
+      height: '48px'
+    }
   },
   rightColumnStyle: {
+    display: 'inline-block',
     width: 'calc(25vw - 50px)',
-    display: 'inline-flex',
-    flexDirection: 'column',
-    justifyContent: 'space-around'
+    '@media screen and (max-width: 768px)': {
+      width: '100vw'
+    }
   },
   buttonStyle: {
     position: 'relative',
@@ -99,6 +139,11 @@ const styles = {
     cursor: 'pointer',
     '&:focus': {
       outline: 'none'
+    },
+    '@media screen and (max-width: 768px)': {
+      transform: 'rotate(0deg)',
+      top: 16,
+      right: 0
     }
   }
 }

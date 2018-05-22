@@ -16,10 +16,14 @@ const NavList = () => (
 
 const styles = {
   ulStyles: {
-    padding: '0 32px',
+    padding: '10vh 48px 0 0',
     margin: 0,
     listStyleType: 'none',
-    width: '100%'
+    width: '100%',
+    transition: 'all .25s ease-in-out',
+    '@media screen and (max-width: 768px)': {
+      padding: '10vh 48px',
+    }
   }
 }
 

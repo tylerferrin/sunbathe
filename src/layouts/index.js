@@ -1,31 +1,52 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 
 import Navigation from '../components/Navigation'
 
-const Layout = ({ children, data }) => (
-  <div
-    css={{
-      height: '100vh'
-    }}
-  >
-    <Helmet
-      title={data.site.siteMetadata.title}
-      meta={[
-        { name: 'description', content: 'Sample' },
-        { name: 'keywords', content: 'sample, something' },
-      ]}
-    />
-    <Navigation />
-    <div>
-      {children()}
-    </div>
-  </div>
-)
+class Layout extends Component {
+  constructor(props) {
+    super(props);
 
-Layout.propTypes = {
-  children: PropTypes.func,
+    this.state = {
+      isMobile: null
+    }
+  }
+
+  innerWidth = () =>  window.innerWidth < 768 ? true : false;
+
+  checkForMobile = () => {
+    if (this.state.isMobile !== this.innerWidth()) {
+      this.setState({ isMobile: this.innerWidth() });
+    }
+  }
+
+  componentWillMount() {
+    window.addEventListener('resize', this.checkForMobile);
+    this.checkForMobile();
+  }
+
+  render() {
+    return (
+      <div
+        css={{
+          height: '100vh'
+        }}
+      >
+        <Helmet
+          title={this.props.data.site.siteMetadata.title}
+          meta={[
+            { name: 'description', content: 'Sample' },
+            { name: 'keywords', content: 'sample, something' },
+          ]}
+        />
+        <Navigation isMobile={this.state.isMobile} />
+        <div>
+          {this.props.children()}
+        </div>
+      </div>
+    );
+  }
 }
 
 export default Layout
