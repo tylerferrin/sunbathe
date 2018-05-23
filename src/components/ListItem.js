@@ -3,12 +3,12 @@ import Link from 'gatsby-link';
 
 const ListItem = (props) => (
   <li css={styles.listItemStyle}>
-    <a
+    <Link
       css={styles.linkStyles}
-      href="/"
+      to={props.to || '/'}
     >
       {props.title}
-    </a>
+    </Link>
   </li>
 );
 

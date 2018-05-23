@@ -31,7 +31,7 @@ export default IndexPage;
 
 export const indexImageQuery = graphql`
   query indexImageQuery {
-    indexImage: imageSharp(id: { regex: "/sb_2/" }) {
+    indexImage: imageSharp(id: { regex: "/sb_1/" }) {
       sizes(maxWidth: 1500 ) {
         ...GatsbyImageSharpSizes
       }
@@ -53,7 +53,7 @@ const styles = {
     position: 'relative',
     height: 'auto',
     width: '50vw',
-    border: '15px solid white',
+    border: '2vw solid white',
     '@media screen and (max-width: 768px)': {
       width: '90vw',
     }

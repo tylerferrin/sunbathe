@@ -3,7 +3,7 @@ import Link from 'gatsby-link';
 
 const Tour = ({ data }) => {
   const { showArray } = data.shows;
-  console.log(showArray);
+  
   return (
     <div>
     </div>

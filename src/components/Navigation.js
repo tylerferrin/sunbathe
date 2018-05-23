@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Link from 'gatsby-link';
 import NavList from './NavList';
+import { withRouter } from 'react-router-dom'
 
 class Navigation extends Component {
   constructor(props) {
@@ -10,13 +11,21 @@ class Navigation extends Component {
       isOpen: false,
       buttonText: 'Menu',
       isMobile: null,
+      location: null
     }
   }
 
   static getDerivedStateFromProps(props, state) {
     if (props.isMobile !== state.isMobile) {
       return {
-        isMobile: props.isMobile
+        isMobile: props.isMobile,
+        location: props.location.pathname
+      }
+    } else if (props.location !== state.location) {
+      return {
+        isMobile: props.isMobile,
+        location: props.location.pathname,
+        isOpen: !state.isOpen
       }
     }
     return null;
@@ -24,7 +33,7 @@ class Navigation extends Component {
 
   buttonText = () => this.state.isOpen  ? 'Close Menu' : 'Menu';
 
-  navWidthToggle() {
+  navStateToggle() {
     this.setState({
       isOpen: !this.state.isOpen
     });
@@ -77,7 +86,7 @@ class Navigation extends Component {
         >
           <button
             css={buttonStyle}
-            onClick={this.navWidthToggle.bind(this)}
+            onClick={this.navStateToggle.bind(this)}
           >
               {this.buttonText()}
           </button>
@@ -88,6 +97,8 @@ class Navigation extends Component {
     )
   }
 }
+
+export default withRouter(Navigation);
 
 const styles = {
   containerStyle: {
@@ -154,5 +165,3 @@ const styles = {
     }
   }
 }
-
-export default Navigation;

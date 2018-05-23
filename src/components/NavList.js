@@ -6,7 +6,7 @@ const NavList = () => (
   <ul
     css={styles.ulStyles}
   >
-    <ListItem title="Tour" />
+    <ListItem title="Tour" to="/tour" />
     <ListItem title="Music" />
     <ListItem title="About" />
     <ListItem title="Contact" />
