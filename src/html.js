@@ -33,7 +33,7 @@ module.exports = class HTML extends React.Component {
           {css}
         </head>
         <body
-          style={{ margin: 0, backgroundColor: 'black' }}
+          style={{ margin: 0, backgroundColor: 'white' }}
           {...this.props.bodyAttributes}>
           {this.props.preBodyComponents}
           <div

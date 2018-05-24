@@ -21,7 +21,7 @@ class Layout extends Component {
     }
   }
 
-  componentWillMount() {
+  componentDidMount() {
     window.addEventListener('resize', this.checkForMobile);
     this.checkForMobile();
   }

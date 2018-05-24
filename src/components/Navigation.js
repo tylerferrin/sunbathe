@@ -25,7 +25,7 @@ class Navigation extends Component {
       return {
         isMobile: props.isMobile,
         location: props.location.pathname,
-        isOpen: !state.isOpen
+        isOpen: false
       }
     }
     return null;
@@ -105,6 +105,7 @@ const styles = {
     position: 'fixed',
     zIndex: 999,
     height: '100%',
+    top: 0,
     right: 0,
     backgroundColor: 'white',
     transition: 'width .5s cubic-bezier(0.215, 0.61, 0.355, 1)',

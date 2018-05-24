@@ -6,11 +6,11 @@ const NavList = () => (
   <ul
     css={styles.ulStyles}
   >
-    <ListItem title="Tour" to="/tour" />
-    <ListItem title="Music" />
-    <ListItem title="About" />
-    <ListItem title="Contact" />
-    <ListItem title="Store" />
+    <ListItem title="Tour" to="/tour" local />
+    <ListItem title="Music" to="http://thisissunbathe.com" />
+    <ListItem title="About" local />
+    <ListItem title="Contact" local />
+    <ListItem title="Store" to="http://thisissunbathe.com" />
   </ul>
 )
 

@@ -1,27 +1,29 @@
 import React from 'react';
 import Link from 'gatsby-link';
 import Img from 'gatsby-image';
+import { css } from 'glamor';
+
+import IndexTitle from '../components/IndexTitle';
+import BackgroundPanels from '../components/BackgroundPanels';
 
 const IndexPage = ({ data }) => {
-  const { titleStyle, imgStyle, imgWrapperStyle, mainPageStyle } = styles;
   return (
     <div
       className="index-page"
-      css={mainPageStyle}
+      css={styles.mainPageStyle}
     >
+      <BackgroundPanels />
+      <IndexTitle />
       <div
         className="image-wrapper"
-        css={imgWrapperStyle}
+        css={styles.imgWrapperStyle}
       >
         <Img
           title="Sunbathe"
           alt="Sunbathe Beauty Shot"
           sizes={data.indexImage.sizes}
-          css={imgStyle}
+          css={styles.imgStyle}
         />
-        <p
-          css={titleStyle}
-        >SUNBATHE</p>
       </div>
     </div>
   );
@@ -41,16 +43,18 @@ export const indexImageQuery = graphql`
 
 const styles = {
   mainPageStyle: {
-    backgroundColor: 'black',
+    position: 'relative',
+    backgroundColor: 'white',
     height: '100vh',
     width: '100%',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   imgWrapperStyle: {
     position: 'relative',
+    zIndex: 10,
     height: 'auto',
     width: '50vw',
     border: '2vw solid white',
@@ -61,15 +65,5 @@ const styles = {
   imgStyle: {
     height: '100%',
     width: '100%'
-  },
-  titleStyle: {
-    position: 'absolute',
-    bottom: -18,
-    right: 24,
-    margin: 0,
-    fontFamily: 'Catamaran',
-    fontSize: '48px',
-    fontWeight: '500',
-    color: 'white'
   }
 }
